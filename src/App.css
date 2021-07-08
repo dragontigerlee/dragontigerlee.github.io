@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.background {
+  width: 100%;
+  background: lightblue;
+  height: auto;
+  padding: 50px;
+  background-image: url('./img/background.jpg');
+  background-size: cover;
+  color:white;
+}
