@@ -16,19 +16,19 @@ export let stockContext = React.createContext();
 function App(props) {
 
   let [shoes, chgShoes] =  useState(Data);
-  let [stock, chgStock] = useState([10,11,12]);
-
+  let [stock, chgStock] = useState([10,11,12,4,5,9]);
+  let [showBtn, chgShowBtn] = useState(1);
 
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">20% Season OFF</Navbar.Brand>
+          <Navbar.Brand href="/">20% Season OFF</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link as={Link} to="/">Home </Nav.Link>
-              <Nav.Link as={Link} to="/detail">Detall</Nav.Link>
+              <Nav.Link as={Link} to="/Cart">Cart</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -46,9 +46,9 @@ function App(props) {
       {/* 메인페이지 */}
       <Route exact path="/">
         <div className="background">
-          <h1> DT 쇼핑몰 </h1>
+          <h1> DragonTiger 쇼핑몰 </h1>
           <p>
-          안녕하세요 쇼핑몰입니다. 환영합니다.안녕하세요 쇼핑몰입니다. 환영합니다.안녕하세요 쇼핑몰입니다. 환영합니다.안녕하세요 쇼핑몰입니다. 환영합니다.안녕하세요 쇼핑몰입니다. 환영합니다.안녕하세요 쇼핑몰입니다. 환영합니다.안녕하세요 쇼핑몰입니다. 환영합니다.안녕하세요 쇼핑몰입니다. 환영합니다.안녕하세요 쇼핑몰입니다. 환영합니다.안녕하세요 쇼핑몰입니다. 환영합니다.안녕하세요 쇼핑몰입니다. 환영합니다.안녕하세요 쇼핑몰입니다. 환영합니다.안녕하세요 쇼핑몰입니다. 환영합니다.안녕하세요 쇼핑몰입니다. 환영합니다.안녕하세요 쇼핑몰입니다. 환영합니다.안녕하세요 쇼핑몰입니다. 환영합니다.안녕하세요 쇼핑몰입니다. 환영합니다.안녕하세요 쇼핑몰입니다. 환영합니다.안녕하세요 쇼핑몰입니다. 환영합니다.안녕하세요 쇼핑몰입니다. 환영합니다.
+          안녕하세요 DragonTiger 쇼핑몰 입니다. React 연습용 쇼핑몰 입니다. 감사합니다.
           </p>
           {/* <p>
             <Button variant="primary">더 보기</Button>
@@ -70,20 +70,23 @@ function App(props) {
 
           </stockContext.Provider>
           
-          <button className="btn btn-primary" onClick={ ()=>{
-            axios.get('https://codingapple1.github.io/shop/data2.json')
-            .then((result)=>{
-              // let newShoes = [...shoes];
-              // newShoes.push.apply(newShoes,result.data);
-              // chgShoes(newShoes);
-              chgShoes([...shoes, ...result.data]);
-              
-            })
-            .catch(()=>{
-              console.log('failed');
-            })
-
-          } }>더보기</button>
+          {
+            (showBtn < 2) ? 
+            <button className="btn btn-primary" onClick={ ()=>{
+              axios.get('https://codingapple1.github.io/shop/data2.json')
+              .then((result)=>{
+                // let newShoes = [...shoes];
+                // newShoes.push.apply(newShoes,result.data);
+                // chgShoes(newShoes);
+                chgShoes([...shoes, ...result.data]);
+                chgShowBtn(++showBtn);
+              })
+              .catch(()=>{
+                console.log('failed');
+              })
+            } }>더보기</button>
+            : null
+          }
         </div>
       </Route>
 
